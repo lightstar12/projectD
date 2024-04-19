@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<script>
+  const resizeDiv = () => {
+    const width = window.innerWidth; // 브라우저 화면의 너비
+    const height = window.innerHeight; // 브라우저 화면의 높이
+    const leftDiv = [...document.getElementsByClassName('left')]
+    const rightDiv = [...document.getElementsByClassName('right')];
+    const rightInDiv = [...document.getElementsByClassName('rightIn')];
+    const limitWidth = 100;
+    let leftWidth = 0;
+    let rightWidth = 0;
+    leftDiv.forEach((div, index) => {
+      // 왼쪽영역 높이
+      document.getElementsByClassName('left')[index].style.height = height - 50 + 'px';
+
+      // 왼쪽영역 폭, 폭이 100px보다 작아지면 100px로 고정
+      if(width * 0.3 > limitWidth){
+        leftWidth = width * 0.3;
+      } else {
+        leftWidth = limitWidth;
+      }
+      document.getElementsByClassName('right')[index].style.width = leftWidth + 'px';
+    });
+    rightDiv.forEach((div, index) => {
+      // 오른쪽영역 높이
+      document.getElementsByClassName('right')[index].style.height = height - 50 + 'px';
+
+      // 오른쪽영역 폭, 폭이 100px보다 작아지면 100px로 고정
+      if(width * 0.6 > limitWidth){
+        rightWidth = width * 0.6;
+      } else {
+        rightWidth = limitWidth ;
+      }
+      document.getElementsByClassName('right')[index].style.width = rightWidth + 'px';
+      rightInDiv.forEach((div, index) => {
+        // 오른쪽 안쪽 영역 높이
+        document.getElementsByClassName('rightIn')[index].style.height = (height - 50)/3 + 'px';
+
+        const rightInWidth = rightWidth/2 * 0.96;
+
+        document.getElementsByClassName('rightIn')[index].style.width = rightInWidth + 'px';
+
+      });
+    })
+  }
+
+  window.onload = () => {
+    resizeDiv();
+  }
+  window.addEventListener('resize', () =>{
+    resizeDiv()
+  })
+
+</script>
+
+<head>
+
+</head>
+
+<body>
+  <!-- div영역을 지정할 때, 약간의 여백이 포함된 채로 생성되기 떄문에, width를 화면의 48%로 지정 -->
+  <div class='left' style='background: red; width: 33%; height: 10px; display:inline-block' >
+
+  </div>
+  <div class="right" style='display:inline-block' >
+    <div class="rightIn" style='background: BLUE; display:inline-block' >
+
+    </div>
+    <div class="rightIn" style='background: gray; display:inline-block' >
+
+    </div>
+    <div class="rightIn" style='background: BLUE; display:inline-block' >
+
+    </div>
+    <div class="rightIn" style='background: gray; display:inline-block' >
+
+    </div>
+    <div class="rightIn" style='background: BLUE; display:inline-block' >
+
+    </div>
+    <div class="rightIn" style='background: gray; display:inline-block' >
+
+    </div>
+  </div>
+
+</body>
+
+</html>

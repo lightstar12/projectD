@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test</title>
+</head>
+<body>
+  <button onclick="loadFile()">Load</button>
+  <div></div>
+</body>
+<script defer>
+  let data;
+  const loadFile = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.onchange = evt => {
+      const selectedFile = evt.target.files[0];
+      processJSON(selectedFile);
+    };
+    input.click();
+  }
+
+  const processJSON = file => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      data = JSON.parse(reader.result);
+      for (let i = 0; i < data.equipment.length; i++) {
+        console.log(data.equipment[i]);
+      }
+      // console.log(data.equipment.length);
+    }
+    reader.readAsText(file);
+  }
+
+
+</script>
+</html>
